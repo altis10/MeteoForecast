@@ -1,0 +1,33 @@
+.meteo-app {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 10fr auto;
+  grid-template-areas:
+    "h"
+    "ia1"
+    "f";
+  /* sets application background image */
+  /* background: url(images/appbackground.png) no-repeat center fixed;
+  background-size: cover; /
+  /* sets font color of the app */
+  color: none;
+  /* sets font style of the app */
+  font-family: 'Verdana';
+  margin: 0;
+  height: 100%;
+}
+
+app-header {
+  grid-area: h;
+}
+
+app-input-area {
+  grid-area: ia1;
+  display: flex;
+  flex-direction: column;
+}
+
+app-footer {
+  grid-area: f;
+}
+

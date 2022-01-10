@@ -94,7 +94,7 @@ Technical requirements:
 ------------------
 
 Optional: 
-* Each column should be sortable. 
+** Each column should be sortable. 
 ** Sorting should not affect paging. 
 ** The sort column and order should be preserved when moving between pages.
 
