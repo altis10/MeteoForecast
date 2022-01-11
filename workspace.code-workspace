@@ -4,5 +4,40 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+
+      {
+        "command": "npm start",
+        "name": "Run npm start",
+        "request": "launch",
+        "type": "node-terminal"
+      },
+      {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "url": "http://localhost:4200/",
+        "webRoot": "${workspaceFolder}"
+      },
+		{
+      "name": "Attach to Chrome",
+      "port": 4200,
+      "request": "attach",
+      "type": "pwa-chrome",
+      "webRoot": "${workspaceFolder}"
+    }
+		],
+    "compounds": [
+      {
+        "name": "Debug: All",
+        "configurations": [
+          "Launch Chrome",
+          "Attach to Chrome"
+        ]
+      }
+     ]
+	}
 }
