@@ -5,6 +5,7 @@
   grid-template-areas:
     "h"
     "ia1"
+    "oa1"
     "f";
   /* sets application background image */
   /* background: url(images/appbackground.png) no-repeat center fixed;
@@ -23,6 +24,12 @@ app-header {
 
 app-input-area {
   grid-area: ia1;
+  display: flex;
+  flex-direction: column;
+}
+
+app-output-area {
+  grid-area: oa1;
   display: flex;
   flex-direction: column;
 }

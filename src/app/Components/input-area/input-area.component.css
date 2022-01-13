@@ -1,6 +1,15 @@
+.input-area-div {
+  background-image: url('../../Meteo/winter-sun.webp');
+}
+
 .server-address-div {
   padding: 2rem;
 }
+
+.server-address-label {
+  color: aquamarine;
+}
+
 .regions-div {
   padding: 2rem;
   display: flex;
@@ -17,7 +26,8 @@
   padding-right: 1rem;
 }
 
-/* .cityDivClass {
-} */
+.refreshAddressBtnClass {
+  margin: 1rem;
+}
 
 

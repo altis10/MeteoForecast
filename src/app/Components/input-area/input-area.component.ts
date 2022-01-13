@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./input-area.component.css']
 })
 export class InputAreaComponent implements OnInit {
+  separator = ' : ';
+  serverAddress: string;
   romaniaReg: subRegion;
   moldovaReg: subRegion;
   europaReg: region;
@@ -17,32 +19,53 @@ export class InputAreaComponent implements OnInit {
   regions: region[];
   selectedRegion: region;
   selectedSubRegion: subRegion;
-  selectedCity: city;
+  public selectedCity: city;
   selectedSubRegions: subRegion[];
   selectedCities: city[];
-  // reg: any;
+  selectedPath: string;
+  inputAreaBckgdPicture: string;
 
   constructor(
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.initializeRegion();
     this.selectedRegion = this.regions[0];
     this.selectedSubRegions = this.selectedRegion.subRegions;
+    this.selectedCities = this.selectedSubRegions[0].cities;
     this.selectedSubRegion = this.selectedSubRegions[0];
+    this.selectedCity = this.selectedCities[0];
+   }
+
+  ngOnInit(): void {
+    this.inputAreaBckgdPicture = "../../Meteo/winter-sun.webp";
+  }
+
+  onServerAddressChange( event: any) {
+    this.serverAddress = event.target.value;
+  }
+
+  onRefreshBtnClicked() {
+
   }
 
   onChangeRegion( event: any): void {
     this.selectedSubRegions = this.regions[event.target.selectedIndex].subRegions;
+    this.selectedSubRegion = this.selectedSubRegions[0];
+    this.selectedCities = this.selectedSubRegions[0].cities;
+    this.selectedCity = this.selectedCities[0];
     console.log(this.selectedSubRegions);
   }
 
   onChangeSubRegion( event: any): void {
     this.selectedCities = this.selectedSubRegions[event.target.selectedIndex].cities;
+    this.selectedCity = this.selectedCities[0];
     console.log(this.selectedCities);
   }
 
   onChangeCity( event: any): void {
+    this.selectedCity = this.selectedCities[event.target.selectedIndex];
+    console.log(this.selectedCity.name);
+
+    this.selectedPath = this.selectedRegion.name + this.separator + this.selectedSubRegion + this.separator + this.selectedCity;
   }
 
   private initializeRegion(): void {
