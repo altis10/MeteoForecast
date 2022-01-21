@@ -1,0 +1,11 @@
+.general-config-area-div-class {
+  background-image: url('../../Meteo/winter-sun.webp');
+}
+
+.server-address-div {
+  padding: 2rem;
+}
+
+.server-address-label {
+  color: aquamarine;
+}

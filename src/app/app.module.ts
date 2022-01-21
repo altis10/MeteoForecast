@@ -9,6 +9,8 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { OutputAreaComponent } from './Components/output-area/output-area.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+import { GeneralConfigAreaComponent } from './Components/general-config-area/general-config-area.component';
 
 @NgModule({
   declarations: [
@@ -16,16 +18,19 @@ import { NgxPaginationModule } from 'ngx-pagination';
     InputAreaComponent,
     HeaderComponent,
     FooterComponent,
-    OutputAreaComponent
+    OutputAreaComponent,
+    GeneralConfigAreaComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgxPaginationModule
   ],
   providers: [
-    InputAreaComponent
+    InputAreaComponent,
+    GeneralConfigAreaComponent
   ],
   bootstrap: [AppComponent]
 })

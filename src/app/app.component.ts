@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HarvestDataService } from './harvest-data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'MeteoForecast';
 
+  constructor(
+    public harvestDataService: HarvestDataService
+  ) {}
 
+  ngOnInit() {
+
+  }
 }

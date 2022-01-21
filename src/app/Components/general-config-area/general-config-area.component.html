@@ -1,0 +1,9 @@
+<div class="general-config-area-div-class">
+  <h1>Select desired configuration:</h1>
+  <p>Choose your location</p>
+  <div class='server-address-div'>
+    <label for="serverAddress" class="server-address-label">Server address:</label>
+    <input id="serverAddressId" type="text" name="serverAddress" class="server-address-input-class" value="{{serverAddress}}" (change)="onServerAddressChange($event)">
+    <button id="refreshAddressButtonId" class="refreshAddressBtnClass" (click)="onRefreshBtnClicked()">Re-Connect</button>
+  </div>
+</div>

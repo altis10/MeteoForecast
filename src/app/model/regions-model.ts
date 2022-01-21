@@ -1,11 +1,11 @@
 export interface region {
   name: string,
-  subRegions: subRegion[]
+  subRegions: string[]
 }
 
 export interface subRegion {
   name: string,
-  cities: city[]
+  cities: string[]
 }
 
 export interface city {
