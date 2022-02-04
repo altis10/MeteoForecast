@@ -22,10 +22,10 @@ export class GeneralConfigAreaComponent implements OnInit {
 
   onServerAddressChange( event: any) {
     this.serverAddress = event.target.value;
-    this.harvestDataService.initializeLocation(this.serverAddress, 0, 1);
+    this.harvestDataService.initializeLocation(this.serverAddress);
   }
 
   onRefreshBtnClicked() {
-    this.harvestDataService.initializeLocation(this.serverAddress, 0, 1);
+    this.harvestDataService.initializeLocation(this.serverAddress);
   }
 }

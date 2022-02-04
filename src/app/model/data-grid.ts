@@ -1,4 +1,4 @@
-export interface row {
+export interface dailyRow {
   date: string,
   tmin: string,
   tmax: string,

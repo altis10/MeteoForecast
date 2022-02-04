@@ -4,7 +4,7 @@ import { InputConfigData, ReceivedMeteoData } from './model/input-output-data-mo
 import { region, subRegion, city } from '../app/model/regions-model';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, concatMap, map, mergeMap, retry } from 'rxjs/operators';
-import { row } from './model/data-grid';
+import { dailyRow } from './model/data-grid';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class HarvestDataService {
   public config: InputConfigData;
   public currentConfig: InputConfigData;
   public harvestedData: ReceivedMeteoData;
-  public meteoData: row[];
-  public initializationDone$ = new Subject<row[]>();
-  public meteoDataReceived$ = new Subject<row[]>();
+  public meteoData: dailyRow[];
+  public initializationDone$ = new Subject<dailyRow[]>();
+  public meteoDataReceived$ = new Subject<dailyRow[]>();
 
   constructor(
     private httpClient: HttpClient
@@ -28,6 +28,8 @@ export class HarvestDataService {
       subregion:'',
       cities: [],
       city:'',
+      skip: 0,
+      take: 1,
       geoRequest: '',
       meteoRequest: ''
     }
@@ -76,7 +78,7 @@ export class HarvestDataService {
     return this.httpClient.get<any>( requestString);
   }
 
-  initializeLocation( srvAddress: string, skipValue: number, takeValue: number): void {
+  initializeLocation( srvAddress: string): void {
     let meteoData: ReceivedMeteoData;
     this.config.serverAddress = srvAddress;
     const geographyKey = srvAddress + '/backend/geography?';
@@ -108,7 +110,7 @@ export class HarvestDataService {
         if(cityResponse!.length > 0) {
           this.config.cities = cityResponse;
           this.config.city = cityResponse[0];
-          searchMeteo = searchMeteo + '&city=' + this.config.city + '&skip=' + skipValue + '&take=' + takeValue;
+          searchMeteo = searchMeteo + '&city=' + this.config.city + '&skip=' + this.config.skip + '&take=' + this.config.take;
           this.config.geoRequest = searchGeo;
           this.config.meteoRequest = searchMeteo;
           return this.harvestData(searchMeteo);
@@ -138,12 +140,12 @@ export class HarvestDataService {
     );
   }
 
-  parseMeteoData( rawData: ReceivedMeteoData): row[] {
-    let returnedData: row[] = new Array();
+  parseMeteoData( rawData: ReceivedMeteoData): dailyRow[] {
+    let returnedData: dailyRow[] = new Array();
 
     var keys = Object.keys(rawData.Data);
     keys.forEach(key => {
-      let addElement: row;
+      let addElement: dailyRow;
 
       addElement = {
         date: key,

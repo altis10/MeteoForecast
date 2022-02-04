@@ -1,9 +1,11 @@
 import { NodeWithI18n } from '@angular/compiler';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HarvestDataService } from 'src/app/harvest-data.service';
 import { ReceivedMeteoData } from 'src/app/model/input-output-data-models';
-import { row } from '../../model/data-grid';
+import { dailyRow } from '../../model/data-grid';
 import { InputAreaComponent } from '../input-area/input-area.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-output-area',
@@ -11,16 +13,23 @@ import { InputAreaComponent } from '../input-area/input-area.component';
   styleUrls: ['./output-area.component.css']
 })
 export class OutputAreaComponent implements OnInit {
-  data: row[];
+  data: dailyRow[];
   page = 1;
   pageSize = 10;
   selectedCity: string;
+  columnsToDisplay = ['date', 'feel', 'forecast', 'tmin', 'tmax', 'ntmin', 'ntmax'];
+  dataSource = new MatTableDataSource<dailyRow>(null);
 
-  @ViewChild(InputAreaComponent, { static: true }) inputAreaComp: InputAreaComponent;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
     public harvestDataService: HarvestDataService
   ) {
-}
+   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit(): void {
     this.harvestDataService.meteoDataReceived$
@@ -28,8 +37,10 @@ export class OutputAreaComponent implements OnInit {
     .subscribe(this.onMeteoDataReceived.bind(this));
   }
 
-  onMeteoDataReceived(newData: row[]) {
-    this.data = newData;
+  onMeteoDataReceived(newData: dailyRow[]) {
+    // this.data = newData;
+
+    this.dataSource = new MatTableDataSource<dailyRow>(newData);
     this.selectedCity = this.harvestDataService?.config?.city;
 
     console.log('Output Area: newData received: ' + newData);

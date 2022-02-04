@@ -11,7 +11,9 @@ import { OutputAreaComponent } from './Components/output-area/output-area.compon
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { GeneralConfigAreaComponent } from './Components/general-config-area/general-config-area.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,10 @@ import { GeneralConfigAreaComponent } from './Components/general-config-area/gen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [
     InputAreaComponent,

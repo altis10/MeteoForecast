@@ -5,7 +5,7 @@ import { ReceivedMeteoData } from 'src/app/model/input-output-data-models';
 import { concatMap, map, mergeMap } from 'rxjs/operators';
 import { GeneralConfigAreaComponent } from '../general-config-area/general-config-area.component';
 import { untilDestroyed } from '@ngneat/until-destroy';
-import { row } from 'src/app/model/data-grid';
+import { dailyRow } from 'src/app/model/data-grid';
 
 @Component({
   selector: 'app-input-area',
@@ -16,16 +16,18 @@ export class InputAreaComponent implements OnInit {
   separator = ' : ';
   serverAddress: string;
   regions: string[];
-  selectedRegionName: string;
-  selectedSubRegion: string;
+  public selectedRegionName: string;
+  public selectedSubRegion: string;
   public selectedCity: string;
-  selectedSubRegions: string[];
-  selectedCities: string[];
+  public selectedSubRegions: string[];
+  public selectedCities: string[];
   selectedPath: string;
   inputAreaBckgdPicture: string;
   initialRegion: region;
   initialSubRegion: subRegion;
   initialCity: city;
+  skipDays: number;
+  takeDays: number;
 
   @ViewChild(GeneralConfigAreaComponent, { static: true }) generalConfigAreaComp: GeneralConfigAreaComponent;
   constructor(
@@ -36,6 +38,8 @@ export class InputAreaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.skipDays = 0;
+    this.takeDays = 1;
     this.harvestDataService.initializationDone$
     .pipe()
     .subscribe(this.onInitializationDone.bind(this));
@@ -66,7 +70,7 @@ export class InputAreaComponent implements OnInit {
     });
   }
 
-  onMeteoDataReceived(newData: row[]) {
+  onMeteoDataReceived(newData: dailyRow[]) {
     this.selectedCity = this.harvestDataService?.config?.city;
 
     console.log('Output Area: newData received: ' + newData);
@@ -85,6 +89,7 @@ export class InputAreaComponent implements OnInit {
         if(subRegResponse!.length > 0) {
           this.harvestDataService.config.subregions = subRegResponse;
           this.harvestDataService.config.subregion = subRegResponse[0];
+          this.selectedSubRegions = subRegResponse;
           this.selectedSubRegion = subRegResponse[0];
           return this.harvestDataService.harvestData( this.harvestDataService.createGeoRequest(this.harvestDataService.config.region, this.harvestDataService.config.subregion, null));
         }
@@ -93,6 +98,7 @@ export class InputAreaComponent implements OnInit {
         if(cityResponse!.length > 0) {
           this.harvestDataService.config.cities = cityResponse;
           this.harvestDataService.config.city = cityResponse[0];
+          this.selectedCities = cityResponse;
           this.selectedCity = cityResponse[0];
           return this.harvestDataService.harvestData( this.harvestDataService
             .createMeteoRequest(this.harvestDataService.config.region, this.harvestDataService.config.subregion, this.harvestDataService.config.city, 0, 1))
@@ -140,13 +146,37 @@ export class InputAreaComponent implements OnInit {
 
   onChangeCity( event: any): void {
     this.selectedCity = this.selectedCities[event.target.selectedIndex];
-    this.harvestDataService.harvestData( this.harvestDataService.createMeteoRequest(this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, 0, 1))
+    this.harvestDataService.harvestData( this.harvestDataService.createMeteoRequest( this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, 0, 1))
     .pipe()
     .subscribe((result) => {
       this.harvestDataService.harvestedData = result;
       this.harvestDataService.meteoData = this.harvestDataService.parseMeteoData(result);
       this.harvestDataService.meteoDataReceived$.next(this.harvestDataService.meteoData);
       console.log('Input Area selectedCity' + this.selectedCity);
+    });
+  }
+
+  onChangeSkipDays( event: any): void {
+    this.harvestDataService.config.skip = event.target.value;
+    this.harvestDataService.harvestData( this.harvestDataService.createMeteoRequest(this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, this.harvestDataService.config.skip, this.harvestDataService.config.take))
+    .pipe()
+    .subscribe((result) => {
+      this.harvestDataService.harvestedData = result;
+      this.harvestDataService.meteoData = this.harvestDataService.parseMeteoData(result);
+      this.harvestDataService.meteoDataReceived$.next(this.harvestDataService.meteoData);
+      console.log('New skip value: ' + this.harvestDataService.config.skip);
+    });
+  }
+
+  onChangeTakeDays( event: any): void {
+    this.harvestDataService.config.take = event.target.value;
+    this.harvestDataService.harvestData( this.harvestDataService.createMeteoRequest(this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, this.harvestDataService.config.skip, this.harvestDataService.config.take))
+    .pipe()
+    .subscribe((result) => {
+      this.harvestDataService.harvestedData = result;
+      this.harvestDataService.meteoData = this.harvestDataService.parseMeteoData(result);
+      this.harvestDataService.meteoDataReceived$.next(this.harvestDataService.meteoData);
+      console.log('New take value: ' + this.harvestDataService.config.take);
     });
   }
 }

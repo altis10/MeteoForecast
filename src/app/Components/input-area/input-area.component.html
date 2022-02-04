@@ -20,6 +20,16 @@
         <option *ngFor="let selectedCity of selectedCities" ([value])="selectedCity">{{selectedCity}}</option>
       </select>
     </div>
+
+    <div class="skipDaysDivClass">
+      <label for="skipDays" class="skip-days-label-class">Skip Days:</label>
+      <input id="skipDaysId" type="text" name="skipDays" class="skip-days-input-class" value="{{skipDays}}" (change)="onChangeSkipDays($event)">
+    </div>
+
+    <div class="takeDaysDivClass">
+      <label for="takeDays" class="take-days-label-class">Take Days:</label>
+      <input id="takeDaysId" type="text" name="takeDays" class="take-days-input-class" value="{{takeDays}}" (change)="onChangeTakeDays($event)">
+    </div>
   </div>
 </div>
 

@@ -4,7 +4,45 @@
     <h1 class="specific-area-name" *ngIf="selectedCity" >{{selectedCity}}</h1>
   </div>
 
-  <div *ngFor="let row of data | paginate: { itemsPerPage: pageSize, currentPage: page }" id="DataGridId" class="data-grid-class">
+  <div class="data-mat-table">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="feel">
+        <th mat-header-cell *matHeaderCellDef> Feel </th>
+        <td mat-cell *matCellDef="let element"> {{element.feel}} </td>
+      </ng-container>
+      <ng-container matColumnDef="forecast">
+        <th mat-header-cell *matHeaderCellDef> Forecast </th>
+        <td mat-cell *matCellDef="let element"> {{element.forecast}} </td>
+      </ng-container>
+      <ng-container matColumnDef="tmin">
+        <th mat-header-cell *matHeaderCellDef> Min temperature </th>
+        <td mat-cell *matCellDef="let element"> {{element.tmin}} </td>
+      </ng-container>
+      <ng-container matColumnDef="tmax">
+        <th mat-header-cell *matHeaderCellDef> Max temperature </th>
+        <td mat-cell *matCellDef="let element"> {{element.tmax}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ntmin">
+        <th mat-header-cell *matHeaderCellDef> Normal Min temperature </th>
+        <td mat-cell *matCellDef="let element"> {{element.ntmin}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ntmax">
+        <th mat-header-cell *matHeaderCellDef> Normal Min temperature </th>
+        <td mat-cell *matCellDef="let element"> {{element.ntmax}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select desired range"></mat-paginator>
+  </div>
+
+  <!--div id="DataGridHeaderId" class="data-grid-class">
     <label class="data-grid-head-cell">Date</label>
     <label class="data-grid-head-cell">Feel</label>
     <label class="data-grid-head-cell">Forecast</label>
@@ -12,6 +50,8 @@
     <label class="data-grid-head-cell">Max temperature</label>
     <label class="data-grid-head-cell">Normal Min temperature</label>
     <label class="data-grid-head-cell">Normal Max temperature</label>
+  </div>
+  <div *ngFor="let row of data | paginate: { itemsPerPage: pageSize, currentPage: page }" id="DataGridId" class="data-grid-class">
     <label class="data-grid-row-cell">{{row.date | date}}</label>
     <label class="data-grid-row-cell">{{row.feel}}</label>
     <label class="data-grid-row-cell">{{row.forecast}}</label>
@@ -19,6 +59,6 @@
     <label class="data-grid-row-cell">{{row.tmax}}</label>
     <label class="data-grid-row-cell">{{row.ntmin}}</label>
     <label class="data-grid-row-cell">{{row.ntmax}}</label>
-  </div>
+  </div-->
 </div>
-<pagination-controls class="data-grid-pagination" autoHide="true" (pageChange)="page = $event"></pagination-controls>
+<!--pagination-controls class="data-grid-pagination" autoHide="true" (pageChange)="page = $event"></pagination-controls-->

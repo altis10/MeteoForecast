@@ -18,6 +18,18 @@
   padding-right: 1rem;
 }
 
+.cityDivClass {
+  padding-right: 1rem;
+}
+
+.skipDaysDivClass {
+  padding-right: 1rem;
+}
+
+.takeDaysDivClass {
+  padding-right: 1rem;
+}
+
 .refreshAddressBtnClass {
   margin: 1rem;
 }

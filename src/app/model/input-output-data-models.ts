@@ -1,4 +1,4 @@
-import { dayData, row } from "./data-grid";
+import { dayData, dailyRow } from "./data-grid";
 import { city, region, subRegion } from "./regions-model";
 
 export class InputConfigData {
@@ -9,6 +9,8 @@ export class InputConfigData {
   subregion: string;
   cities: string[];
   city: string;
+  skip: number;
+  take: number;
   meteoRequest: string;
   geoRequest: string;
 }
