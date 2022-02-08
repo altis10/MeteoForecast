@@ -13,15 +13,15 @@ Angular
 -- Add API authentication
 
 Soft skills improved as effect:
-- Autonomy 
--- ability to design a small project or parts of a bigger one independently; 
+- Autonomy
+-- ability to design a small project or parts of a bigger one independently;
 -- empowered & accountable on own decisions
 
 - Communication (i.e. with the "customer")
 
 
 -----------------------------
-PHASE 1
+PHASE 1 - DONE
 -----------------------------
 
 We have a weather forecast REST API exposed at this URL: http://ocpa.ro/backend/
@@ -93,12 +93,7 @@ Technical requirements:
 
 ------------------
 
-Optional: 
-** Each column should be sortable. 
-** Sorting should not affect paging. 
-** The sort column and order should be preserved when moving between pages.
 
-* Customizable app look and feel via CSS
 
 
 Phase 1 Deliverables:
@@ -121,3 +116,32 @@ Ideas of stories: Input Area / Output Area / Paging Controls / Background servic
 - The code should be added in GitHub repo
 - Should be possible to access the app via a LAN URL (no internet publish at this time)
 -----------------------------
+
+
+-----------------------------
+PHASE 2
+-----------------------------
+Goals: add backend authentication + other cosmetic changes
+
+Backend: Add API Basic authentication
+
+Frontend:
+- Add support for basic authentication
+- Each column should be sortable.
+- Sorting should not affect paging.
+- The sort column and order should be preserved when moving between pages.
+- Customizable app look and feel via CSS
+
+Deliverables
+------------
+
+1. Story/tasks break down; Estimations - BitBucket.org
+
+2. Design
+- Discussions wiki page under BitBucket
+
+3. Implementation
+- The front end code should be added in same GitHub repo
+- The backedn code - Fork of ocpa.ro repo
+
+
