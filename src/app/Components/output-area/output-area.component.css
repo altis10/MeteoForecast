@@ -12,6 +12,10 @@
   color:darkblue
 }
 
+.data-mat-table {
+  background-color: bisque;
+}
+
 table {
   width: 100%;
 }

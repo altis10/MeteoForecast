@@ -14,6 +14,8 @@ import { GeneralConfigAreaComponent } from './Components/general-config-area/gen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import { MatTableModule } from '@angular/material/table';
     NgxPaginationModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     InputAreaComponent,

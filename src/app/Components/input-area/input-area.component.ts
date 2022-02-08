@@ -101,7 +101,7 @@ export class InputAreaComponent implements OnInit {
           this.selectedCities = cityResponse;
           this.selectedCity = cityResponse[0];
           return this.harvestDataService.harvestData( this.harvestDataService
-            .createMeteoRequest(this.harvestDataService.config.region, this.harvestDataService.config.subregion, this.harvestDataService.config.city, 0, 1))
+            .createMeteoRequest(this.harvestDataService.config.region, this.harvestDataService.config.subregion, this.harvestDataService.config.city, this.harvestDataService.config.skip, this.harvestDataService.config.take))
         }
       }),
       map((meteoResponse) => {
@@ -129,7 +129,7 @@ export class InputAreaComponent implements OnInit {
         this.harvestDataService.config.city = this.selectedCities[0];
         this.harvestDataService.harvestedData.Data = [];
         return this.harvestDataService.harvestData( this.harvestDataService
-          .createMeteoRequest(this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, 0, 1))
+          .createMeteoRequest(this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, this.harvestDataService.config.skip, this.harvestDataService.config.take))
         }),
         map((meteoResponse) => {
           return meteoResponse;
@@ -146,7 +146,7 @@ export class InputAreaComponent implements OnInit {
 
   onChangeCity( event: any): void {
     this.selectedCity = this.selectedCities[event.target.selectedIndex];
-    this.harvestDataService.harvestData( this.harvestDataService.createMeteoRequest( this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, 0, 1))
+    this.harvestDataService.harvestData( this.harvestDataService.createMeteoRequest( this.harvestDataService.config.region, this.selectedSubRegion, this.selectedCity, this.harvestDataService.config.skip, this.harvestDataService.config.take))
     .pipe()
     .subscribe((result) => {
       this.harvestDataService.harvestedData = result;

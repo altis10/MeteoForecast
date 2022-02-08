@@ -39,26 +39,8 @@
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select desired range"></mat-paginator>
+    <mat-paginator #paginator [length]="100" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageEvent = $event" aria-label="Select desired range">
+    </mat-paginator>
   </div>
 
-  <!--div id="DataGridHeaderId" class="data-grid-class">
-    <label class="data-grid-head-cell">Date</label>
-    <label class="data-grid-head-cell">Feel</label>
-    <label class="data-grid-head-cell">Forecast</label>
-    <label class="data-grid-head-cell">Min temperature</label>
-    <label class="data-grid-head-cell">Max temperature</label>
-    <label class="data-grid-head-cell">Normal Min temperature</label>
-    <label class="data-grid-head-cell">Normal Max temperature</label>
-  </div>
-  <div *ngFor="let row of data | paginate: { itemsPerPage: pageSize, currentPage: page }" id="DataGridId" class="data-grid-class">
-    <label class="data-grid-row-cell">{{row.date | date}}</label>
-    <label class="data-grid-row-cell">{{row.feel}}</label>
-    <label class="data-grid-row-cell">{{row.forecast}}</label>
-    <label class="data-grid-row-cell">{{row.tmin}}</label>
-    <label class="data-grid-row-cell">{{row.tmax}}</label>
-    <label class="data-grid-row-cell">{{row.ntmin}}</label>
-    <label class="data-grid-row-cell">{{row.ntmax}}</label>
-  </div-->
 </div>
-<!--pagination-controls class="data-grid-pagination" autoHide="true" (pageChange)="page = $event"></pagination-controls-->
